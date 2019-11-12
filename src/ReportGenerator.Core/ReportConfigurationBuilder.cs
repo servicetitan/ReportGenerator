@@ -30,6 +30,7 @@ namespace Palmmedia.ReportGenerator.Core
             var fileFilters = new string[] { };
             string verbosityLevel = null;
             string tag = null;
+            string authtoken = null;
 
             string value = null;
 
@@ -95,6 +96,10 @@ namespace Palmmedia.ReportGenerator.Core
             {
                 tag = value;
             }
+            if (namedArguments.TryGetValue("AUTHTOKEN", out value))
+            {
+                authtoken = value;
+            }
 
             return new ReportConfiguration(
                 reportFilePatterns,
@@ -107,7 +112,8 @@ namespace Palmmedia.ReportGenerator.Core
                 classFilters,
                 fileFilters,
                 verbosityLevel,
-                tag);
+                tag,
+                authtoken);
         }
 
         /// <summary>

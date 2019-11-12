@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Palmmedia.ReportGenerator.Core.Common;
 using Palmmedia.ReportGenerator.Core.Properties;
+using System.Net.Http.Headers;
 
 namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
 {
@@ -19,7 +20,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// <summary>
         /// The HttpClient to retrieve remote files.
         /// </summary>
-        private static readonly HttpClient HttpClient = new HttpClient();
+        private readonly HttpClient HttpClient;
 
         /// <summary>
         /// <see cref="IFileReader"/> for loading files from local disk.
@@ -36,10 +37,16 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         /// </summary>
         /// <param name="localFileReader"><see cref="IFileReader"/> for loading files from local disk.</param>
         /// <param name="cachingDuringOfRemoteFilesInMinutes">The caching duration of code files that are downloaded from remote servers in minutes.</param>
-        public CachingFileReader(IFileReader localFileReader, int cachingDuringOfRemoteFilesInMinutes)
+        /// <param name="authToken">Authorization token (will be used with private repos)</param>
+        public CachingFileReader(IFileReader localFileReader, int cachingDuringOfRemoteFilesInMinutes, string authToken)
         {
             this.localFileReader = localFileReader;
             this.cachingDuringOfRemoteFilesInMinutes = cachingDuringOfRemoteFilesInMinutes;
+            HttpClient = new HttpClient();
+            if (authToken != null)
+            {
+                HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("token", authToken);
+            }
         }
 
         /// <summary>
@@ -79,7 +86,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
                         // Ignore error, file gets downloaded in next step
                     }
 
-                    string content = HttpClient.GetStringAsync(path).Result;
+                    string content = HttpClient.GetStringAsync(path).ConfigureAwait(false).GetAwaiter().GetResult();
                     string[] lines = content.Split('\n').Select(l => l.TrimEnd('\r')).ToArray();
 
                     try

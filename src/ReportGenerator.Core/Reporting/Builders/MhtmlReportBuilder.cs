@@ -303,6 +303,12 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             /// </summary>
             public string Tag => this.reportConfiguration.Tag;
 
+
+            /// <summary>
+            /// Gets the custom tag (e.g. build number).
+            /// </summary>
+            public string AuthToken => this.reportConfiguration.AuthToken;
+
             /// <summary>
             /// Gets the invalid file patters supplied by the user.
             /// </summary>

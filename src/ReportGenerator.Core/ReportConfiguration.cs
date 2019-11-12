@@ -47,7 +47,8 @@ namespace Palmmedia.ReportGenerator.Core
             IEnumerable<string> classFilters,
             IEnumerable<string> fileFilters,
             string verbosityLevel,
-            string tag)
+            string tag,
+            string authToken)
         {
             if (reportFilePatterns == null)
             {
@@ -148,6 +149,7 @@ namespace Palmmedia.ReportGenerator.Core
             }
 
             this.Tag = tag;
+            this.AuthToken = authToken;
         }
 
         /// <summary>
@@ -204,6 +206,12 @@ namespace Palmmedia.ReportGenerator.Core
         /// Gets the custom tag (e.g. build number).
         /// </summary>
         public string Tag { get; }
+
+
+        /// <summary>
+        /// Auth token for support of SourceLink with private repositories
+        /// </summary>
+        public string AuthToken { get; }
 
         /// <summary>
         /// Gets the invalid file patters supplied by the user.
