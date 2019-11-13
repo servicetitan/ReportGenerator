@@ -15,3 +15,4 @@ bin
 obj
 .DS_Store
 node_modules
+**/launchSettings.json

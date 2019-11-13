@@ -29,13 +29,13 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public ITaskItem[] ReportFiles { get; set; }
 
         /// <summary>
-        /// Gets or sets the directory the report will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically. 
+        /// Gets or sets the directory the report will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically.
         /// </summary>
         [Required]
         public string TargetDirectory { get; set; }
 
         /// <summary>
-        /// Gets or sets the directory the historic data will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically. 
+        /// Gets or sets the directory the historic data will be created in. This must be a directory, not a file. If the directory does not exist, it is created automatically.
         /// </summary>
         public string HistoryDirectory { get; set; }
 
@@ -110,6 +110,11 @@ namespace Palmmedia.ReportGenerator.MSBuild
         public string Tag { get; set; }
 
         /// <summary>
+        /// Auth token for support of SourceLink with private repositories
+        /// </summary>
+        public string AuthToken { get; set; }
+
+        /// <summary>
         /// When overridden in a derived class, executes the task.
         /// </summary>
         /// <returns>
@@ -137,7 +142,8 @@ namespace Palmmedia.ReportGenerator.MSBuild
                 this.ClassFilters == null ? Enumerable.Empty<string>() : this.ClassFilters.Select(r => r.ItemSpec),
                 this.FileFilters == null ? Enumerable.Empty<string>() : this.FileFilters.Select(r => r.ItemSpec),
                 this.VerbosityLevel,
-                this.Tag);
+                this.Tag,
+                this.AuthToken);
 
             return new Generator().GenerateReport(configuration);
         }

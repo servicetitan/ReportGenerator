@@ -65,9 +65,13 @@ namespace Palmmedia.ReportGenerator.Core.Parser.Preprocessing
                 foreach (var @class in classes)
                 {
                     var fileNameAttribute = @class.Attribute("filename");
-                    string path = Path.Combine(sources[0], fileNameAttribute.Value)
-                        .Replace('\\', Path.DirectorySeparatorChar)
-                        .Replace('/', Path.DirectorySeparatorChar);
+                    string path = Path.Combine(sources[0], fileNameAttribute.Value);
+
+                    if (!fileNameAttribute.Value.StartsWith("http://", System.StringComparison.Ordinal) &&
+                       !fileNameAttribute.Value.StartsWith("https://", System.StringComparison.Ordinal))
+                    {
+                        path = path.Replace('\\', Path.DirectorySeparatorChar).Replace('/', Path.DirectorySeparatorChar);
+                    }
                     fileNameAttribute.Value = path;
                 }
             }

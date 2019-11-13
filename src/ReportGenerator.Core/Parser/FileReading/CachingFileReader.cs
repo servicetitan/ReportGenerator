@@ -59,6 +59,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         {
             try
             {
+                //if (path.StartsWith("http:\\\\") || path.StartsWith("https:\\\\"))
                 if (path.StartsWith("http://") || path.StartsWith("https://"))
                 {
                     string cacheDirectory = Path.Combine(Path.GetTempPath(), "ReportGenerator_Cache");
