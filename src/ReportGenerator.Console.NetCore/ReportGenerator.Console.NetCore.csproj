@@ -9,6 +9,11 @@
     <StartupObject>Palmmedia.ReportGenerator.Console.NetCore.Program</StartupObject>
     <AssemblyVersion>4.3.6.1</AssemblyVersion>
     <FileVersion>4.3.6.1</FileVersion>
+    <RollForward>Major</RollForward>
+    <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <RuntimeIdentifiers>win-x64;linux-musl-x64;linux-x64</RuntimeIdentifiers>
   </PropertyGroup>
 
   <ItemGroup>
