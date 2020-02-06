@@ -12,7 +12,7 @@
     "author": "Palmmedia",
     "version": {
         "Major": 4,
-        "Minor": 3,
+        "Minor": 4,
         "Patch": 6
     },
     "instanceNameFormat": "ReportGenerator",

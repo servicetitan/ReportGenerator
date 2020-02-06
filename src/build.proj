@@ -11,26 +11,26 @@
       <Version>5.2.0</Version>
     </PackageReference>
   </ItemGroup>
-  
+
   <!-- Required to support command " msbuild .\build.proj /t:restore" -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  
+
   <!-- Imported MSBuild tasks -->
   <UsingTask TaskName="ReportGenerator" AssemblyFile="ReportGenerator.Console\bin\Release\ReportGenerator.exe" />
-  <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
-  <UsingTask TaskName="FileUpdate" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" /> 
+  <UsingTask TaskName="Zip" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" />
+  <UsingTask TaskName="FileUpdate" AssemblyFile="$(UserProfile)\.nuget\packages\msbuildtasks\1.5.0.235\tools\MSBuild.Community.Tasks.dll" />
 
   <!-- Version, adjust before build -->
   <PropertyGroup>
-    <Version>4.3.6.1-oauth</Version>
+    <Version>4.4.6-oauth</Version>
   </PropertyGroup>
-  
+
   <!-- Tools -->
   <PropertyGroup>
     <NuGetCommandLine>$(UserProfile)\.nuget\packages\nuget.commandline\5.2.0\tools\NuGet.exe</NuGetCommandLine>
     <ChocolateyCommandLine>$(UserProfile)\.nuget\packages\chocolatey\0.10.14\tools\chocolateyInstall\choco.exe</ChocolateyCommandLine>
   </PropertyGroup>
-  
+
   <Target Name="Clean">
     <RemoveDir Directories="ReportGenerator.Console\bin" />
     <RemoveDir Directories="ReportGenerator.Console\obj" />
@@ -53,7 +53,7 @@
 
   <Target Name="Compile">
     <MSBuild Projects="ReportGenerator.sln" Targets="Restore;Build" Properties="Configuration=Release" />
-    
+
     <Exec Command="dotnet publish -c Release ReportGenerator.DotnetCliTool.csproj" WorkingDirectory="ReportGenerator.DotnetCliTool" />
 
     <Exec Command="dotnet publish -c Release -f netcoreapp2.0 ReportGenerator.Console.NetCore.csproj" WorkingDirectory="ReportGenerator.Console.NetCore" />
@@ -93,21 +93,21 @@
     <MakeDir Directories="tmpzip" />
     <MakeDir Directories="tmpzip\net47" />
     <MakeDir Directories="tmpzip\netcoreapp2.0" />
-    <Copy SourceFiles="@(ZipFileContentBase)" DestinationFolder="tmpzip" /> 
-    <Copy SourceFiles="@(ZipFileContentNet47)" DestinationFolder="tmpzip\net47" /> 
+    <Copy SourceFiles="@(ZipFileContentBase)" DestinationFolder="tmpzip" />
+    <Copy SourceFiles="@(ZipFileContentNet47)" DestinationFolder="tmpzip\net47" />
     <Copy SourceFiles="@(ZipFileContentNetCore20)" DestinationFolder="tmpzip\netcoreapp2.0\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="tmpzip\netcoreapp2.1\%(RecursiveDir)" />
     <Copy SourceFiles="@(ZipFileContentNetCore30)" DestinationFolder="tmpzip\netcoreapp3.0\%(RecursiveDir)" />
    <ItemGroup>
       <ZipFileContent Include="tmpzip\**\*.*"/>
-    </ItemGroup> 
+    </ItemGroup>
     <Zip Files="@(ZipFileContent)" WorkingDirectory="$(MSBuildThisFileDirectory)tmpzip" ZipFileName="target\packages\ReportGenerator_$(Version).zip" ZipLevel="9" />
-    <RemoveDir Directories="tmpzip" />  
+    <RemoveDir Directories="tmpzip" />
 
     <!-- AzureDevopsTask -->
-    <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />  
+    <RemoveDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />
     <MakeDir Directories="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1" />
-    <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1\%(RecursiveDir)" /> 
+    <Copy SourceFiles="@(ZipFileContentNetCore21)" DestinationFolder="AzureDevopsTask\ReportGenerator\tools\netcoreapp2.1\%(RecursiveDir)" />
     <Exec Command="npm run tsc --" WorkingDirectory="AzureDevopsTask\ReportGenerator" />
     <Exec Command="tfx extension create --manifest-globs vss-extension.json --output-path ..\target\packages" WorkingDirectory="AzureDevopsTask" />
 
@@ -116,19 +116,19 @@
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\ReportGenerator.Core.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-cli.nuspec -OutputDirectory target\packages -Version $(Version)" />
     <Exec Command="$(NuGetCommandLine) pack Deployment\nuget\dotnet-reportgenerator-globaltool.nuspec -OutputDirectory target\packages -Version $(Version)" />
-    
+
     <!-- Chocolatey -->
     <Exec Command="$(ChocolateyCommandLine) pack Deployment\chocolatey\reportgenerator.portable.nuspec --outputdirectory=target\packages --version=$(Version)" />
   </Target>
-      
+
   <Target Name="Publish" DependsOnTargets="Deploy">
     <!-- Nuget -->
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\ReportGenerator.Core.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-cli.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
     <Exec Command="$(NuGetCommandLine) push .\target\packages\dotnet-reportgenerator-globaltool.$(Version).nupkg -ApiKey $(NugetApiKey) -Source https://www.nuget.org/api/v2/package" />
-    
+
     <!-- Chocolatey -->
     <Exec Command="$(ChocolateyCommandLine) push .\target\packages\reportgenerator.portable.$(Version).nupkg --apikey $(ChocolateyApiKey) --source https://push.chocolatey.org/" />
-  </Target> 
+  </Target>
 </Project>
