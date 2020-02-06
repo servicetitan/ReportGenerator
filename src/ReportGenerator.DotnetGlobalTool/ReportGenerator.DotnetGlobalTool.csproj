@@ -2,21 +2,24 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>ReportGenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
     <StartupObject>Palmmedia.ReportGenerator.DotnetGlobalTool.Program</StartupObject>
     <AssemblyVersion>4.4.6.0</AssemblyVersion>
     <FileVersion>4.4.6.0</FileVersion>
+    <RollForward>Major</RollForward>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="ProgramIcon.ico" />
+    <Content Include="ProgramIcon.ico" />
+
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ProgramIcon.ico" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>

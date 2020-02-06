@@ -41,7 +41,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser.FileReading
         public CachingFileReader(IFileReader localFileReader, int cachingDurationOfRemoteFilesInMinutes, string authToken)
         {
             this.localFileReader = localFileReader;
-            this.cachingDuringOfRemoteFilesInMinutes = cachingDurationOfRemoteFilesInMinutes;
+            this.cachingDurationOfRemoteFilesInMinutes = cachingDurationOfRemoteFilesInMinutes;
             HttpClient = new HttpClient();
             if (authToken != null)
             {

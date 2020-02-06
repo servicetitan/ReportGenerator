@@ -1,8 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<!--<Project Sdk="Microsoft.NET.Sdk">-->
+<Project Sdk="MSBuild.Sdk.Extras">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0</TargetFrameworks>
     <ApplicationIcon>ProgramIcon.ico</ApplicationIcon>
     <AssemblyName>ReportGenerator</AssemblyName>
     <RootNamespace>Palmmedia.ReportGenerator</RootNamespace>
@@ -11,17 +12,24 @@
     <FileVersion>4.4.6.0</FileVersion>
     <RollForward>Major</RollForward>
     <PublishReadyToRun>true</PublishReadyToRun>
+    <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
+    <DeployOnBuild>true</DeployOnBuild>
     <RuntimeIdentifiers>win-x64;linux-musl-x64;linux-x64</RuntimeIdentifiers>
+    <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+    <ExtrasBuildEachRuntimeIdentifier>true</ExtrasBuildEachRuntimeIdentifier>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="ProgramIcon.ico" />
+    <Content Include="ProgramIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="ProgramIcon.ico" />
+    <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+    <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
   </ItemGroup>
 
   <ItemGroup>
