@@ -136,7 +136,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
         {
             string targetPath = Path.Combine(this.ReportContext.ReportConfiguration.TargetDirectory, "Summary.mht");
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             using (var writer = new StreamWriter(new FileStream(targetPath, FileMode.Create)))
             {
@@ -297,6 +297,11 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             /// Gets the verbosity level.
             /// </summary>
             public VerbosityLevel VerbosityLevel => this.reportConfiguration.VerbosityLevel;
+
+            /// <summary>
+            /// Gets the custom title.
+            /// </summary>
+            public string Title => this.reportConfiguration.Title;
 
             /// <summary>
             /// Gets the custom tag (e.g. build number).

@@ -22,6 +22,7 @@ ReportGenerator supports merging several reports into one.
 The following output formats are supported by ReportGenerator:
 
 -Html, HtmlSummary, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlChart, MHtml
+-Clover
 -Cobertura
 -SonarQube
 -lcov
@@ -61,6 +62,45 @@ For further details take a look at LICENSE.txt.
 =======================================================================
 
 CHANGELOG
+
+4.5.8.0
+
+    * Fix: Issue #341: Improved parameter handling in MSBuild task
+
+4.5.6.0
+
+    * Fix: Issue #340: Fixed typo in badges
+
+4.5.5.0
+
+    * Fix: Issue #338: Improved error/warning messages
+    * Fix: Issue #339: Badges are now always genererated with text 'N/A' if not available
+
+4.5.4.0
+
+    * Fix: Issue #336: Fix class-level branch coverage for OpenCover
+
+4.5.3.0
+
+    * Fix: Issue #335: Workaround for MSBuild task in .NET Core SDK 3.1.20x
+
+4.5.2.0
+
+    * Fix: Issue #331: Fixed string encoding in JsonSummary
+
+4.5.1.0
+
+    * New: Issue #324: Removed image urls for HTML inline reports
+    * New: Issue #329: Allow custom report heading via new '-title' command line parameter
+    * Fix: Issue #326: Reduced verbosity of logs for Info level
+
+4.5.0.0
+
+    * New: Issue #323: Added new output format Clover
+
+4.4.7.0
+
+    * Fix: Issue #320: TeamCitySummary: Corrected reporting of branches
 
 4.4.6.0
 

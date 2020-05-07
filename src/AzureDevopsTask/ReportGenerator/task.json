@@ -12,8 +12,8 @@
     "author": "Palmmedia",
     "version": {
         "Major": 4,
-        "Minor": 4,
-        "Patch": 6
+        "Minor": 5,
+        "Patch": 8
     },
     "instanceNameFormat": "ReportGenerator",
     "groups": [
@@ -41,7 +41,7 @@
             "label": "Report types",
             "defaultValue": "HtmlInline_AzurePipelines;Cobertura",
             "required": false,
-            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlSummary, Latex, LatexSummary, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, Xml, XmlSummary"
+            "helpMarkDown": "The output formats and scope (separated by semicolon) Values: Badges, Clover, Cobertura, CsvSummary, Html, HtmlChart, HtmlInline, HtmlInline_AzurePipelines, HtmlInline_AzurePipelines_Dark, HtmlSummary, JsonSummary, Latex, LatexSummary, lcov, MHtml, PngChart, SonarQube, TeamCitySummary, TextSummary, Xml, XmlSummary"
         },
         {
             "name": "sourcedirs",
@@ -73,7 +73,7 @@
             "label": "Assembly filters",
             "defaultValue": "+*",
             "required": false,
-            "helpMarkDown": "Optional list of assemblies that should be included or excluded in the report."
+            "helpMarkDown": "Optional list of assemblies that should be included or excluded in the report. Exclusion filters take precedence over inclusion filters. Wildcards are allowed."
         },
         {
             "name": "classfilters",
@@ -105,6 +105,14 @@
               },
             "required": false,
             "helpMarkDown": "The verbosity level of the log messages. Values: Verbose, Info, Warning, Error, Off"
+        },
+        {
+            "name": "title",
+            "type": "string",
+            "label": "Title",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Optional title."
         },
         {
             "name": "tag",

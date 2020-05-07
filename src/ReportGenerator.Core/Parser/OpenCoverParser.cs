@@ -107,7 +107,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
         /// <returns>The <see cref="Assembly"/>.</returns>
         private Assembly ProcessAssembly(IDictionary<string, XElement[]> assemblyModules, XElement[] files, IDictionary<string, string> trackedMethods, string assemblyName)
         {
-            Logger.DebugFormat("  " + Resources.CurrentAssembly, assemblyName);
+            Logger.DebugFormat(Resources.CurrentAssembly, assemblyName);
 
             var fileIdsByFilename = assemblyModules[assemblyName]
                 .Elements("Files")
@@ -467,7 +467,7 @@ namespace Palmmedia.ReportGenerator.Core.Parser
                 {
                     if (branches.TryGetValue(identifier, out var found))
                     {
-                        found.BranchVisits += found.BranchVisits;
+                        found.BranchVisits += vc;
                     }
                     else
                     {

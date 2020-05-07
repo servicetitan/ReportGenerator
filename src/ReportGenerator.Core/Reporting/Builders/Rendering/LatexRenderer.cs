@@ -122,7 +122,8 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className)
+        /// <param name="additionalTitle">Additional title.</param>
+        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle)
         {
             if (this.classReportTextWriter == null)
             {
@@ -614,7 +615,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
 
             string targetPath = Path.Combine(targetDirectory, "Summary.tex");
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
 
             combinedReportStream = new FileStream(targetPath, FileMode.Create);
 

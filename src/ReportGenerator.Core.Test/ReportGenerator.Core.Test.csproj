@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Palmmedia.ReportGenerator.Core.Test</RootNamespace>
-    <AssemblyVersion>4.4.6.0</AssemblyVersion>
-    <FileVersion>4.4.6.0</FileVersion>
+    <AssemblyVersion>4.5.8.0</AssemblyVersion>
+    <FileVersion>4.5.8.0</FileVersion>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="2.6.3">
+    <PackageReference Include="coverlet.msbuild" Version="2.8.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
-    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+    <PackageReference Include="Moq" Version="4.14.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>
@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ReportGenerator.Core\ReportGenerator.Core.csproj" />
     <ProjectReference Include="..\ReportGenerator.DotnetCorePluginLoader\ReportGenerator.DotnetCorePluginLoader.csproj" />
+    <ProjectReference Include="..\ReportGenerator.MSBuild\ReportGenerator.MSBuild.csproj" />
   </ItemGroup>
 
   <ItemGroup>

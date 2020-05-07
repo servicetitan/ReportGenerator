@@ -129,7 +129,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 targetPath = Path.Combine(targetDirectory, fileName);
             }
 
-            Logger.InfoFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.InfoFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(targetPath);
 
             using (var cssStream = this.GetCombinedCss())
@@ -148,13 +148,14 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         /// <param name="targetDirectory">The target directory.</param>
         /// <param name="assemblyName">Name of the assembly.</param>
         /// <param name="className">Name of the class.</param>
-        public void BeginClassReport(string targetDirectory, string assemblyName, string className)
+        /// <param name="additionalTitle">Additional title.</param>
+        public void BeginClassReport(string targetDirectory, string assemblyName, string className, string additionalTitle)
         {
             this.classReport = true;
 
             string targetPath = GetClassReportFilename(assemblyName, className);
 
-            Logger.DebugFormat("  " + Resources.WritingReportFile, targetPath);
+            Logger.DebugFormat(Resources.WritingReportFile, targetPath);
             this.CreateTextWriter(Path.Combine(targetDirectory, targetPath));
 
             using (var cssStream = this.GetCombinedCss())
@@ -163,7 +164,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                     "<style TYPE=\"text/css\">" + new StreamReader(cssStream).ReadToEnd() + "</style>"
                     : CssLink;
 
-                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(ReportResources.CoverageReport), style);
+                this.reportTextWriter.WriteLine(HtmlStart, WebUtility.HtmlEncode(className), WebUtility.HtmlEncode(additionalTitle + ReportResources.CoverageReport), style);
             }
         }
 
@@ -1344,14 +1345,31 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
         private Stream GetCombinedCss()
         {
             var ms = new MemoryStream();
+            var lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
+
+            void CopyWithFilteredUrls(Stream s)
+            {
+                if (!this.inlineCssAndJavaScript)
+                {
+                    s.CopyTo(ms);
+                    return;
+                }
+
+                using (var reader = new StreamReader(s))
+                {
+                    var contents = Regex.Replace(reader.ReadToEnd(), @"url\(icon_.+.svg\),\s", string.Empty);
+                    var bytes = Encoding.UTF8.GetBytes(contents);
+                    ms.Write(bytes, 0, bytes.Length);
+                    ms.Write(lineBreak, 0, lineBreak.Length);
+                }
+            }
 
             using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
                 $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{this.cssFileResource}"))
             {
-                stream.CopyTo(ms);
+                CopyWithFilteredUrls(stream);
             }
 
-            byte[] lineBreak = Encoding.UTF8.GetBytes(Environment.NewLine);
             ms.Write(lineBreak, 0, lineBreak.Length);
             ms.Write(lineBreak, 0, lineBreak.Length);
 
@@ -1363,7 +1381,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering
                 using (Stream stream = typeof(HtmlRenderer).Assembly.GetManifestResourceStream(
                     $"Palmmedia.ReportGenerator.Core.Reporting.Builders.Rendering.resources.{this.additionalCssFileResource}"))
                 {
-                    stream.CopyTo(ms);
+                    CopyWithFilteredUrls(stream);
                 }
 
                 ms.Write(lineBreak, 0, lineBreak.Length);
