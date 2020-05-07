@@ -186,7 +186,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting.Builders
             string title = this.ReportContext.ReportConfiguration.Title != null ? $"{ReportResources.Summary} - {this.ReportContext.ReportConfiguration.Title}" : ReportResources.Summary;
 
             reportRenderer.BeginSummaryReport(this.ReportContext.ReportConfiguration.TargetDirectory, null, title);
-            reportRenderer.HeaderWithGithubLinks(title);
+            // reportRenderer.HeaderWithGithubLinks(title);
 
             reportRenderer.BeginKeyValueTable();
             reportRenderer.KeyValueRow(ReportResources.GeneratedOn, DateTime.Now.ToShortDateString() + " - " + DateTime.Now.ToLongTimeString());

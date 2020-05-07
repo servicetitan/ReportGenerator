@@ -1,5 +1,5 @@
-﻿<!--<Project Sdk="Microsoft.NET.Sdk">-->
-<Project Sdk="MSBuild.Sdk.Extras">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+<!--<Project Sdk="MSBuild.Sdk.Extras">-->
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -13,12 +13,12 @@
     <RollForward>Major</RollForward>
     <PublishReadyToRun>false</PublishReadyToRun>
     <PublishReadyToRunShowWarnings>true</PublishReadyToRunShowWarnings>
-    <PublishSingleFile>true</PublishSingleFile>
-    <PublishTrimmed>true</PublishTrimmed>
+    <PublishSingleFile>false</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
     <DeployOnBuild>true</DeployOnBuild>
     <RuntimeIdentifiers>win-x64;linux-musl-x64;linux-x64</RuntimeIdentifiers>
     <!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
-    <ExtrasBuildEachRuntimeIdentifier>true</ExtrasBuildEachRuntimeIdentifier>
+    <!--<ExtrasBuildEachRuntimeIdentifier>true</ExtrasBuildEachRuntimeIdentifier>-->
     <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
   </PropertyGroup>
 
