@@ -27,6 +27,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new string[] { },
                 new string[] { },
                 null,
+                null,
                 null);
 
             Assert.Contains(ReportPath, configuration.ReportFiles);
@@ -59,7 +60,7 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
                 VerbosityLevel.Warning.ToString(),
-                "CustomTag");
+                "CustomTag", authToken: null);
 
             Assert.Contains(ReportPath, configuration.ReportFiles);
             Assert.Equal("C:\\temp", configuration.TargetDirectory);
@@ -98,7 +99,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new string[] { },
                 new string[] { },
                 "Invalid",
-                null);
+                null, null
+                );
 
             Assert.Contains(ReportPath, configuration.ReportFiles);
             Assert.Equal("C:\\temp", configuration.TargetDirectory);

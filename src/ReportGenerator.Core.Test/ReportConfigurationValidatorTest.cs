@@ -34,7 +34,9 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new[] { "+Test3", "-Test3" },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null
+                );
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -55,7 +57,9 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null
+                );
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -76,7 +80,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -97,7 +102,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -118,7 +124,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -139,7 +146,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -160,7 +168,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -181,7 +190,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -202,7 +212,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "Test2" },
                 new[] { "Test3" },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 
@@ -223,7 +234,8 @@ namespace Palmmedia.ReportGenerator.Core.Test
                 new[] { "+Test2", "-Test2" },
                 new string[] { },
                 VerbosityLevel.Info.ToString(),
-                null);
+                null,
+                authToken: null);
 
             var sut = new ReportConfigurationValidator(this.reportBuilderFactoryMock.Object);
 

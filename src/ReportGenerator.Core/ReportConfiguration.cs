@@ -36,6 +36,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
+        /// <param name="authToken">The auth token for github oauth.</param>
         public ReportConfiguration(
             IEnumerable<string> reportFilePatterns,
             string targetDirectory,
@@ -166,6 +167,7 @@ namespace Palmmedia.ReportGenerator.Core
         /// <param name="fileFilters">The file filters.</param>
         /// <param name="verbosityLevel">The verbosity level.</param>
         /// <param name="tag">The custom tag (e.g. build number).</param>
+        /// <param name="authToken">The auth token for github oauth.</param>
         /// <param name="title">The custom title.</param>
         public ReportConfiguration(
             IEnumerable<string> reportFilePatterns,
@@ -179,8 +181,9 @@ namespace Palmmedia.ReportGenerator.Core
             IEnumerable<string> fileFilters,
             string verbosityLevel,
             string tag,
+            string authToken,
             string title)
-            : this(reportFilePatterns, targetDirectory, sourceDirectories, historyDirectory, reportTypes, plugins, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag)
+            : this(reportFilePatterns, targetDirectory, sourceDirectories, historyDirectory, reportTypes, plugins, assemblyFilters, classFilters, fileFilters, verbosityLevel, tag, authToken: authToken)
         {
             this.Title = title;
         }
@@ -245,9 +248,8 @@ namespace Palmmedia.ReportGenerator.Core
         /// </summary>
         public string Tag { get; }
 
-
         /// <summary>
-        /// Auth token for support of SourceLink with private repositories
+        /// Gets auth token for support of SourceLink with private repositories.
         /// </summary>
         public string AuthToken { get; }
 

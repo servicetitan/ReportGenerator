@@ -69,7 +69,7 @@ namespace Palmmedia.ReportGenerator.Core.Reporting
         string Tag { get; }
 
         /// <summary>
-        /// Auth token for support of SourceLink with private repositories
+        /// Gets auth token for support of SourceLink with private repositories.
         /// </summary>
         string AuthToken { get; }
 

@@ -104,6 +104,8 @@ namespace Palmmedia.ReportGenerator.Core.Test.Reporting
 
             public IReadOnlyCollection<HistoricCoverage> OverallHistoricCoverages { get; set; }
 
+            public string AuthToken { get; }
+
             public string Title { get; set; }
 
             public string Tag { get; set; }
